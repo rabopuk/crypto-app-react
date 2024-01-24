@@ -1,0 +1,21 @@
+import { Layout } from "antd";
+// import s from './AppHeader.module.css';
+
+const headerStyle = {
+  textAlign: 'center',
+  color: '#fff',
+  height: 60,
+  paddingInline: 48,
+  lineHeight: '64px',
+  backgroundColor: '#4096ff',
+};
+
+export const AppHeader = () => {
+
+
+  return (
+    <Layout.Header style={headerStyle}>AppHeader</Layout.Header>
+  );
+};
+
+export default AppHeader;
