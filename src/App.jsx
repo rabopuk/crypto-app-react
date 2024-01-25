@@ -1,4 +1,4 @@
-import AppLayout from './components/Layout/AppLayout/AppLayout..jsx';
+import AppLayout from './components/layout/AppLayout.jsx';
 import { CryptoContextProvider } from './context/crypto-context.jsx';
 
 export const App = () => {
