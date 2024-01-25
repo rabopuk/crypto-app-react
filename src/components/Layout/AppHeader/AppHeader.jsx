@@ -11,8 +11,6 @@ const headerStyle = {
 };
 
 export const AppHeader = () => {
-
-
   return (
     <Layout.Header style={headerStyle}>AppHeader</Layout.Header>
   );

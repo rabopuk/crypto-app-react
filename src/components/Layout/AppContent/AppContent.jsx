@@ -10,8 +10,6 @@ const contentStyle = {
 };
 
 export const AppContent = () => {
-
-
   return (
     <Layout.Content style={contentStyle}>AppContent</Layout.Content>
   );

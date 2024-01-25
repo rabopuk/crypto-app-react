@@ -1,8 +1,8 @@
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
-import { Card, Layout, List, Spin, Statistic, Tag, Typography } from 'antd';
-import { useEffect, useState } from 'react';
-import { fakeFetchAssetsData, fakeFetchCryptoData } from '../../../api.js';
-import { capitalize, percentDifference } from '../../../utils.js';
+import { Card, Layout, List, Statistic, Tag, Typography } from 'antd';
+import { useContext } from 'react';
+import CryptoContext from '../../../context/crypto-context.jsx';
+import { capitalize } from '../../../utils.js';
 // import s from './AppSider.module.css';
 
 const siderStyle = {
@@ -10,38 +10,7 @@ const siderStyle = {
 };
 
 export const AppSider = () => {
-  const [loading, setLoading] = useState(false);
-  const [crypto, setCrypto] = useState([]);
-  const [assets, setAssets] = useState([]);
-
-  useEffect(() => {
-    const preload = async () => {
-      setLoading(true);
-
-      const { result } = await fakeFetchCryptoData();
-      const assets = await fakeFetchAssetsData();
-
-      setCrypto(result);
-      setAssets(assets.map(asset => {
-        const coin = result.find(c => c.id === asset.id)
-
-        return {
-          grow: (asset.price < coin.price),
-          growPercent: percentDifference(asset.price, coin.price),
-          totalAmount: (asset.amount * coin.price),
-          totalProfit: (asset.amount * coin.price) - (asset.amount * asset.price),
-          ...asset,
-        };
-      }));
-      setLoading(false);
-    };
-
-    preload();
-  }, []);
-
-  if (loading) {
-    return <Spin fullscreen />;
-  }
+  const { assets } = useContext(CryptoContext);
 
   return (
     <Layout.Sider width="25%" style={siderStyle}>
@@ -59,7 +28,7 @@ export const AppSider = () => {
             suffix="$"
           />
           <List
-            size="large"
+            size="small"
             dataSource={[
               { title: 'Total profit', value: asset.totalProfit, withTag: true },
               { title: 'Asset amount', value: asset.amount, isPlain: true, },
@@ -91,18 +60,6 @@ export const AppSider = () => {
           />
         </Card>
       ))}
-
-
-      {/* <Card>
-        <Statistic
-          title="Idle"
-          value={9.3}
-          precision={2}
-          valueStyle={{ color: '#cf1322' }}
-          prefix={<ArrowDownOutlined />}
-          suffix="%"
-        />
-      </Card> */}
     </Layout.Sider>
   );
 }
