@@ -13,7 +13,7 @@ export const CoinInfo = ({ coin, withSymbol }) => (
       level={2}
     >
       {withSymbol && (
-        <span>{`(${coin.symbol})`}</span>
+        <span>{`(${coin.symbol}) `}</span>
       )} {coin.name}
     </Typography.Title>
   </Flex>
